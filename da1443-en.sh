@@ -21,13 +21,18 @@ yum -y install dos2unix patch screen unzip lftp tar quota autoconf automake libt
 
 ln -s /usr/lib/libssl.so /usr/lib/libssl.so.6
 ln -s /usr/lib/libcrypto.so /usr/lib/libcrypto.so.6
-
+###############################################################
+##############################################################
 echo "           รอสักครู่นะจ๊ะ  กำลังโหลดไฟล์โปรแกรมจร้า";
 echo "";
 mkdir -p /usr/local/directadmin
-wget -q -O da1443-en.tar.gz http://89.107.61.176/da1443-en.tar.gz
+wget -q -O da1443-en.tar.gz https://github.com/thanaphat/DA-Install/raw/master/da1443-en.tar.gz
+###############################################################
+###############################################################
 tar xvf da1443-en.tar.gz -C /usr/local/directadmin
 
+echo "";
+echo "";
 echo "		โหลดเรียบร้อยจร้า  รอไรล่ะ ติดตั้งกันเลย.........................................";
 echo "			Direct Admin Control Panel  1.44.3 ";
 echo "";
@@ -58,6 +63,7 @@ fi
 #fi
 
 
+
 CID=0;
 LID=0;
 HOST=`hostname`;
@@ -74,15 +80,15 @@ case "$1" in
 		echo "or";
 		echo "";
 		echo "Usage: $0 <uid> <lid> <hostname> <ethernet_dev> (<ip>)";
-		echo "          <uid> : ใส่ชื่อเว็บของคุณ เช่น www.hostingvirgin.com";
-		echo "          <lid> : ใส่ชื่อเว็บอีกรอบนึง  www.hostingvirgin.com";
-		echo "     <hostname> : ใส่ชื่อ เซิฟเวอร์ เช่น server.hostingvirgin.com";
-		echo " <ethernet_dev> : เลือกการ์ด Internet ของเครื่อง Server ใส่หมายเลขการ์ด เช่น eth0";
+		echo "          <uid> : Your Client ID";
+		echo "          <lid> : Your License ID";
+		echo "     <hostname> : Your server's hostname (FQDN)";
+		echo " <ethernet_dev> : Your ethernet device with the server IP";
 		echo "           <ip> : Optional.  Use to override the IP in <ethernet_dev>";
 		echo "";
 		echo "";
 		echo "Common pre-install commands:";
-		echo " มีปัญหาติดต่อ support@hostingvirgin.com นะจ๊ะ";
+		echo " http://help.directadmin.com/item.php?id=354";
 		exit 0;
 		;;
 esac
@@ -124,9 +130,9 @@ fi
 if [ -e /usr/local/directadmin ]; then
 	echo "";
 	echo "";
-	echo "*** ในเย็นๆนะจ๊ะ พักกินน้ำสักแก้วก่อน แล้วค่อยติดตั้งจร้า................ ***";
-	echo "    แต่ถ้าไม่อยากติดตั้งแล้วกดปุ่ม Ctrl + C นะจ๊ะ จะยกเลิกให้";
-	echo "    หรือ รอสัก 10 วินาที จะเข้าสู่หน้าติดตั้งโปรแกรม";
+	echo "*** DirectAdmin already exists ***";
+	echo "    Press Ctrl-C within the next 10 seconds to cancel the install";
+	echo "    Else, wait, and the install will continue, but will destroy existing data";
 	echo "";
 	echo "";
 	sleep 10;
@@ -135,9 +141,9 @@ fi
 if [ -e /usr/local/cpanel ]; then
         echo "";
         echo "";
-        echo "*** อุต๊ะ ในเครื่องนี้มี Cpanel อยู่อะ เค้าไม่ให้ตัวเองติดตั้งนะจ๊ะ ไปลบก่อนไป๊ ชิ้วๆ ***";
-        echo "    แต่ถ้าไม่อยากติดตั้งแล้วกดปุ่ม Ctrl + C นะจ๊ะ จะยกเลิกให้";
-   		echo "  	เค้าล้อเล่นน่า  .... อ๊ะ ติดตั้งให้ก็ได้ รอแปบน้า............. ";
+        echo "*** CPanel exists on this system ***";
+        echo "    Press Ctrl-C within the next 10 seconds to cancel the install";
+        echo "    Else, wait, and the install will continue overtop (as best it can)";
         echo "";
         echo "";
         sleep 10;
@@ -400,9 +406,9 @@ if [ "$SERVICES" = "" ]; then
 		read SERVICES
 	
 		echo "";
-		echo "เลือกเซิฟเวอร์จากข้างบนจ้า เช่น ตัว Centos 6.8 _64 ใส่ services_es60_64.tar.gz: $SERVICES";
+		echo "Value entered: $SERVICES";
 	
-	        echo -n "ใส่ใจนะ? ถ้าแน่ใจกดปุ่ม Y ถ้าไม่แน่ใจกดปุ่ม N นะจ๊ะ : ";
+	        echo -n "Is this correct? (y,n) : ";
 	        read yesno;
 	}
 	done;
@@ -421,6 +427,14 @@ else
 	echo "*   Improved By HOSTINGVIRGIN.COM";
 	echo "*";
 	echo "*****************************************************";
+	echo "";
+	echo "";
+	echo "";
+	echo "#############   Hosting Virgin [ www.hostingvirgin.com ] #######################";
+	echo "";
+	echo "";
+	echo "";
+
 fi
 
 while [ "$yesno" = "n" ];
@@ -1492,4 +1506,5 @@ sleep 1
 printf \\a
 sleep 1
 printf \\a
+
 
