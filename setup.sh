@@ -91,9 +91,8 @@ echo "";
 echo "";
 echo "";
 echo "";
-https://github.com/thanaphat/DA-Install/blob/master/da1443-en.sh
+wget https://raw.githubusercontent.com/thanaphat/DA-Install/master/da1443-en.sh
 ############################################################
 ############################################################
-
 chmod 0755 da1443-en.sh
 ./da1443-en.sh 2>&1|tee directadmin_install.log
